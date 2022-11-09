@@ -1,4 +1,3 @@
-# webos_calendar
 
 # webos_calendar
 
