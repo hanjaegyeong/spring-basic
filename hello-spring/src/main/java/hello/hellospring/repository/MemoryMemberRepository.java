@@ -22,7 +22,7 @@ public class MemoryMemberRepository implements MemberRepository{
 
     @Override
     public Optional<Member> findByName(String name) {
-        // 루프 돌면서 하나 찾아지면 바로 걔 반환(findAny) 하나도 없으면 optional null 반환
+        // 루프 돌면서 하나 찾아지면 바로 반환(findAny) 하나도 없으면 optional null 반환
         return store.values().stream()
                 .filter(member -> member.getName().equals(name))  //람다 사용
                 .findAny();
@@ -31,5 +31,9 @@ public class MemoryMemberRepository implements MemberRepository{
     @Override
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    public void clearStore() {
+        store.clear();
     }
 }
