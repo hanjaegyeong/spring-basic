@@ -5,8 +5,8 @@ import hello.hellospring.domain.Member;
 import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository{
-    private static Map<Long, Member> store = new HashMap<>();
-    private static long sequence = 0L;
+    private static Map<Long, Member> store = new HashMap<>();  //Map에 id(key)-member(value) 쌍 삽입: id로 member 검색할 수 ㅣㅇㅆ도록
+    private static long sequence = 0L; //0: int값, L: Long형, id값에 들어가는 인자
 
     @Override
     public Member save(Member member) {
@@ -16,7 +16,7 @@ public class MemoryMemberRepository implements MemberRepository{
     }
 
     @Override
-    public Optional<Member> findById(Long id) {
+    public Optional<Member> findById(Long id) {  //해당 id 데이터 유무 탐색
         return Optional.ofNullable(store.get(id)); //원래 store.get(id)만 하면 되는데 null반환 가능성이 있으니 Optional로 감싸야함
     }
 
@@ -31,9 +31,9 @@ public class MemoryMemberRepository implements MemberRepository{
     @Override
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
-    }
+    } //전체 member list형으로 리턴
 
     public void clearStore() {
         store.clear();
-    }
+    } //test에서 afterEach에서 사용될 저장소 clear 함수
 }
