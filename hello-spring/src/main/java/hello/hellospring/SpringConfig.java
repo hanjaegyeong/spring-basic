@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringConfig {
 
-    @Bean //자동으로 빈 생성해줌
+    @Bean //빈 생성해줌
     public MemberService memberService() {
         return new MemberService(memberRepository());  //이전에 autowired 했던 것과 유사
     }
