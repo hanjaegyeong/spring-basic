@@ -1,29 +1,27 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-//단위테스트
-class MemberServiceTest {
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
+//통합테스트
+@SpringBootTest
+@Transactional //db데이터 인서트까지만 하고 커밋하지 않고 다시 롤백해주는 애노테이션
+class MemberServiceIntegrationTest {
 
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository); //서비스 입장에선 자신이 레포지토리 생성하는 게 아닌 외부에서 받는 것: dependency injection
-    }
-
-    @AfterEach
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
+    //테스트케이스는 필드에 의존성주입해도 괜찮음. 테스트를 다른곳에서 쓸 것이 아니기 때문
+    @Autowired MemberService memberService;
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
     void 회원가입() {
@@ -54,13 +52,5 @@ class MemberServiceTest {
 
         //then
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
-    }
-
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
     }
 }
