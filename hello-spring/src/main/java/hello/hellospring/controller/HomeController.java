@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/")
     public String home() {
-        return "home";
+        return "home"; //templates에 home.html로 연결
     }
 }
