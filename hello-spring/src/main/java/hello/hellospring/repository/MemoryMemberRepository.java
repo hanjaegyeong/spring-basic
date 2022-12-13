@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-//해당 애노테이션으로 스프링이 해당 레포지토리 객체를 스프링 컨테이너에 삽입
-@Repository
+//@Repository:해당 애노테이션으로 스프링이 해당 레포지토리 객체를 스프링 컨테이너에 삽입
 public class MemoryMemberRepository implements MemberRepository{
     private static Map<Long, Member> store = new HashMap<>();  //Map에 id(key)-member(value) 쌍 삽입: id로 member 검색할 수 있도록
     private static long sequence = 0L; //0: int값, L: Long형, id값에 들어가는 인자
