@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-//멤버레포지토리라는 DB 인터페이스의 구현체를 메모리기반에서 실제 DB로 바꾸면서도 기존코드는 수정 없음. 스프링에서 제공하는 configuration파일만 수정
+//멤버레포지토리 인터페이스의 구현체를 메모리->실제 DB로 바꾼것
+//그럼에도 기존코드는 수정 없음. 스프링에서 제공하는 configuration파일만 수정: 객체지향의 "다형성" 이용해 "개방폐쇄 원칙" 지켜진 것
 @Configuration
 public class SpringConfig {
 
@@ -29,6 +30,6 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+        return new JdbcMemberRepository(dataSource); //의존성 주입 이용하면 기존코드 변경없이 설정만으로 구현클래스 변경가능
     }
 }
