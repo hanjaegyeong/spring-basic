@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 //기존 jdbcMemberRepository를 템플릿 매서드 패턴과 콜백을 사용해서 간단하게 줄인 것
+//but sql문은 직접 작성해야 한다는 번거로움 있음 -> JPA사용으로 개선 가능
 public class JdbcTemplateMemberRepository implements MemberRepository {
     private final JdbcTemplate jdbcTemplate;
     public JdbcTemplateMemberRepository(DataSource dataSource) {
