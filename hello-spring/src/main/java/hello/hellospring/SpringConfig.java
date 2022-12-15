@@ -1,5 +1,6 @@
 package hello.hellospring;
 
+import hello.hellospring.aop.TimeTraceAop;
 import hello.hellospring.repository.*;
 import hello.hellospring.service.MemberService;
 import jakarta.persistence.EntityManager;
@@ -26,6 +27,11 @@ public class SpringConfig {
     @Bean //빈 생성해줌
     public MemberService memberService() {
         return new MemberService(memberRepository);  //이전에 autowired 했던 것과 유사
+    }
+
+    @Bean
+    public TimeTraceAop timeTraceAop() { //얘처럼 특별한 애들은 스프링 빈에 직접 등록해주는 게 좋음
+        return new TimeTraceAop();
     }
     /*@Bean
     public MemberRepository memberRepository() {
