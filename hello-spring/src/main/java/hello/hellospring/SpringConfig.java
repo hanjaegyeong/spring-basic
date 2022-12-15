@@ -15,22 +15,23 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private EntityManager em;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em) { //intellij 세팅에 따라 빨간 줄 생길 수 있지만 동작에 문제 없는 거라 넘어가도 됨
-        this.em = em;
+    //스프링 컨테이너에서 MemberRepository 찾는데 등록한 것 없음. but SpringDataJpaRepository에서 쟤를 extends해서 등록해뒀기 때문에 자동으로 빈으로 등록
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Bean //빈 생성해줌
     public MemberService memberService() {
-        return new MemberService(memberRepository());  //이전에 autowired 했던 것과 유사
+        return new MemberService(memberRepository);  //이전에 autowired 했던 것과 유사
     }
-    @Bean
+    /*@Bean
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource); //의존성 주입 이용하면 기존코드 변경없이 설정만으로 구현클래스 변경가능
 //        return new JdbcTemplateMemberRepository(dataSource);
         return new JpaMemberRepository(em);
-    }
+    }*/
 }
